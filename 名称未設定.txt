@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マニアック（これは凄い！） MNP Q&A 50選</title>
+<style>
+  :root{
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --card-border: #cbd5e1;
+    --blue: #1e40af;
+    --blue-soft: #3b82f6;
+    --blue-pale: #eff6ff;
+    --text-main: #0f172a;
+    --text-sub: #334155;
+    --category-bg: #1e293b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:32px 12px 80px;
+    background:var(--bg);
+    color:var(--text-main);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    line-height:1.7;
+  }
+  .header-box{
+    max-width:720px;
+    margin:0 auto 28px;
+    padding:28px 20px 22px;
+    border:2px solid var(--blue);
+    border-radius:16px;
+    background:linear-gradient(180deg, var(--blue-pale) 0%, #ffffff 70%);
+    text-align:center;
+    position:relative;
+  }
+  h1{
+    font-size:1.5rem;
+    margin:0 0 10px;
+    color:var(--blue);
+    letter-spacing:.02em;
+    font-weight:800;
+  }
+  .subtitle{
+    color:var(--text-sub);
+    font-size:.85rem;
+    margin-bottom:6px;
+  }
+  .qa-list{
+    max-width:720px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .category-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: var(--category-bg);
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .category-title:first-of-type {
+    margin-top: 0;
+  }
+  .qa-item{
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:12px;
+    overflow:hidden;
+    transition:border-color .2s ease, box-shadow .2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  .qa-item.open{
+    border-color:var(--blue-soft);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+  }
+  .qa-question{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px 18px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .qa-badge{
+    flex:0 0 auto;
+    font-size:.7rem;
+    color:#ffffff;
+    background:var(--blue);
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:6px;
+    letter-spacing:.03em;
+  }
+  .qa-question-text{
+    flex:1 1 auto;
+    font-size:.95rem;
+    font-weight:600;
+    color:var(--text-main);
+  }
+  .qa-icon{
+    flex:0 0 auto;
+    width:20px;
+    height:20px;
+    position:relative;
+    transition:transform .25s ease;
+  }
+  .qa-icon::before,.qa-icon::after{
+    content:"";
+    position:absolute;
+    background:var(--blue);
+    border-radius:2px;
+  }
+  .qa-icon::before{
+    width:100%;
+    height:2px;
+    top:9px; left:0;
+  }
+  .qa-icon::after{
+    width:2px;
+    height:100%;
+    left:9px; top:0;
+    transition:opacity .2s ease;
+  }
+  .qa-item.open .qa-icon{
+    transform:rotate(180deg);
+  }
+  .qa-item.open .qa-icon::after{
+    opacity:0;
+  }
+  .qa-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    padding:0 18px;
+  }
+  .qa-item.open .qa-answer{
+    max-height:2000px;
+    padding:0 18px 18px;
+  }
+  .answer-conclusion{
+    background:var(--blue-pale);
+    border-left:3px solid var(--blue);
+    padding:10px 14px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:.9rem;
+    margin-bottom:12px;
+    color:var(--text-main);
+  }
+  .answer-conclusion span{
+    color:var(--blue);
+    font-size:.75rem;
+    display:block;
+    margin-bottom:4px;
+    font-weight:700;
+    letter-spacing:.05em;
+  }
+  .answer-points{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .answer-points li{
+    font-size:.85rem;
+    color:var(--text-sub);
+    padding-left:1.3em;
+    position:relative;
+  }
+  .answer-points li::before{
+    content:"・";
+    position:absolute;
+    left:0;
+    color:var(--blue-soft);
+  }
+  .answer-points li b{
+    color:var(--text-main);
+  }
+  .footer-note{
+    max-width:720px;
+    margin:32px auto 0;
+    text-align:center;
+    font-size:.75rem;
+    color:var(--text-sub);
+  }
+</style>
+</head>
+<body>
+
+<div class="header-box">
+  <h1>マニアック（これは凄い！） Q&amp;A 50選</h1>
+  <div class="subtitle">項目をクリックすると回答が展開します</div>
+</div>
+
+<div class="qa-list" id="qaList"></div>
+
+<div class="footer-note">クリックで開閉 / 全50問</div>
+
+<script>
+const sections = [
+  {
+    title: "1. アテナ案件・裏施策の突っ込んだ仕様（10選）",
+    items: [
+      {
+        id: "Q1-1",
+        question: "UQモバイルの「当月CB履歴ある場合不可」という厳しいショップ案件で、別のCBを貰う裏ワザはありますか？",
+        conclusion: "同月でCBをもらっていない「別の利用者」を登録すればCBが貰えます。",
+        points: [
+          { label: "理由", text: "契約者名義に履歴があっても、利用者が異なればアラートを回避できる仕様になっているためです。" },
+          { label: "数字", text: "1つの回避策（別利用者登録）。" }
+        ]
+      },
+      {
+        id: "Q1-2",
+        question: "UQのCB施策で既存回線が1回線ある状態から3回線MNP（計4回線）にする際、2回線目のCBが出るか怪しい時はどう立ち回るべきですか？",
+        conclusion: "アラートが出た場合に「端末施策」へ変更してもらえるよう、事前に交渉・確認しておくと良いです。",
+        points: [
+          { label: "理由", text: "CBが弾かれても、端末値引き等の別施策にスライドできれば損失を防げるためです。" },
+          { label: "数字", text: "2つの施策（CB施策と端末施策の切り替え）。" }
+        ]
+      },
+      {
+        id: "Q1-3",
+        question: "アテナ案件（例：015や059）の条件が通るかどうか、一番確実に見極める方法は何ですか？",
+        conclusion: "週ごとに細かく変わるため、手配LINEに直接聞くのが確実です。",
+        points: [
+          { label: "理由", text: "ショップ案件の条件は流動的であり、一般論だけでは突発的なルール変更に対応できないためです。" },
+          { label: "数字", text: "週単位（条件の変更スパン）。" }
+        ]
+      },
+      {
+        id: "Q1-4",
+        question: "統一審査基準とは何ですか？店舗独自のルールで断られた時にも使えますか？",
+        conclusion: "全店舗に共通する公式のルールです。本来は問題なく通るはずの基準です。",
+        points: [
+          { label: "理由", text: "店舗独自の判断で断られるケースがあっても、本来の統一基準を満たしていれば手続き自体は規約違反ではないためです。" },
+          { label: "数字", text: "1つの統一基準。" }
+        ]
+      },
+      {
+        id: "Q1-5",
+        question: "ドコモ案件（例：087）で、自分名義2回線と「委任状＋弟名義」で1回線を同時に通すことは可能ですか？",
+        conclusion: "可能です。",
+        points: [
+          { label: "理由", text: "弟の本人確認書類原本と、家族関係証明書類を持参できれば、ドコモ全般のルールとして代理受付ができるためです。" },
+          { label: "数字", text: "計3回線（自分2、弟1）。" }
+        ]
+      },
+      {
+        id: "Q1-6",
+        question: "関西圏や関東の特定店舗（新三郷、柏、秋葉原）だけで通る、凄まじいd回線の裏ルート（既存回線乗り換え）とは何ですか？",
+        conclusion: "「既存の元docomo回線」であっても、別のd回線へ乗り換えが可能です。",
+        points: [
+          { label: "理由", text: "通常なら同一キャリア内でのMNPは不可、または特典対象外ですが、特定エリアでは乗り換えが通る施策が存在するためです。" },
+          { label: "数字", text: "関東3エリア＋関西全域。" }
+        ]
+      },
+      {
+        id: "Q1-7",
+        question: "法人ドコモ案件を実施する際、会社の代表者が「個人名義」でドコモ回線を持っていても実施可能ですか？",
+        conclusion: "確認できません。（ログ内で質問されましたが、回答がありません）",
+        points: [
+          { label: "理由", text: "チャット上にこの法人に関する質問への答えが残されていないためです。" },
+          { label: "数字", text: "0（回答なし）" }
+        ]
+      },
+      {
+        id: "Q1-8",
+        question: "アテナ案件で、ソフトバンクやワイモバイル（SBYM）のSIMのみ契約で利益を最大化する組み合わせは何ですか？",
+        conclusion: "木曜zoomで案内される「ホームルーター」の案件と組み合わせます。",
+        points: [
+          { label: "理由", text: "SIMのみ（単体）では光やAirを入れないと利益が出にくいため、ルーターとセットにすることで爆発力を高めるためです。" },
+          { label: "数字", text: "2つの組み合わせ（SIM＋ホームルーター）。" }
+        ]
+      },
+      {
+        id: "Q1-9",
+        question: "アテナ案件008や009の大きな強み（メリット）は何ですか？",
+        conclusion: "同じ店舗で「ドコモ」と「UQ」を同時に契約できる点です。",
+        points: [
+          { label: "理由", text: "複数店舗をハシゴする手間を省き、かつドコモの光空申込なども並行して一気に進められるためです。" },
+          { label: "数字", text: "2つのキャリア（ドコモ・UQ）を1店舗で処理。" }
+        ]
+      },
+      {
+        id: "Q1-10",
+        question: "関東エリアの有益な手配情報を最速で手に入れる、アテナ手配LINE以外のルートは何ですか？",
+        conclusion: "パインさんのDiscord（ステップ3で開放されるページに記載）です。",
+        points: [
+          { label: "理由", text: "関東エリアの案件はそちらに集まることが多く、手配料無料の案件を抱える手配師も複数在籍しているためです。" },
+          { label: "数字", text: "手配料無料の案件が複数存在。" }
+        ]
+      }
+    ]
+  },
+  {
+    title: "2. 置き型WiFi（Air/home5G）を使い倒す1Day高速コンボ（10選）",
+    items: [
+      {
+        id: "Q2-1",
+        question: "ドコモ home5Gを5月に新規契約した場合、最短でいつ他社に乗り換えるのが最善ですか？",
+        conclusion: "6月中にSoftBank Airに乗り換えるコンボが可能です。",
+        points: [
+          { label: "理由", text: "短期間での解約・新規乗り換えを繰り返すことで、各社の補填金（安心乗り換えキャンペーン等）を連続して狙うためです。" },
+          { label: "数字", text: "1ヶ月スパン（5月契約→6月乗換）。" }
+        ]
+      },
+      {
+        id: "Q2-2",
+        question: "ドコモ home5GからSoftBank Airへ乗り換えた後、さらに次へ繋ぐ3ステップの高速コンボの全貌を教えてください。",
+        conclusion: "①6月にSB Air契約（ドコモ解約・残金支払）、②補填金確認のためSB Airを約6ヶ月維持、③その後GMOへ乗り換えSB Air解約、という流れです。",
+        points: [
+          { label: "理由", text: "各社の残債補填金とキャッシュバックのタイミングを完全に計算し、手出しを最小限にして利益を残すためです。" },
+          { label: "数字", text: "合計約1年半（Air6ヶ月維持＋GMO1年維持）。" }
+        ]
+      },
+      {
+        id: "Q2-3",
+        question: "すでに自宅で「SoftBank光」を契約している状態で、新しく「SoftBank Air」の安心乗り換えキャンペーン（残債補填）は使えますか？",
+        conclusion: "原則使えません。ただし、既存契約と「名義」および「住所」が違う場合は利用可能です。",
+        points: [
+          { label: "理由", text: "同一名義・同一住所に既存のSB光/Airがある場合、解約後3ヶ月空けないとキャンペーン対象外になるという厳しい縛りがあるためです。" },
+          { label: "数字", text: "解約後3ヶ月間のブランクが必要。" }
+        ]
+      },
+      {
+        id: "Q2-4",
+        question: "自宅に既存のSoftBank光があるのに、ドコモ home5GからSoftBank Airへ1Dayで乗り換えてしまった場合の最悪のデメリットは何ですか？",
+        conclusion: "ドコモ解約時の高額な残債補填（安心乗り換えキャンペーン）が受けられなくなります。",
+        points: [
+          { label: "理由", text: "既存のSB光と重複し、キャンペーン対象外条件に引っかかるためです。" },
+          { label: "数字", text: "0（補填金が貰えないリスク）。" }
+        ]
+      },
+      {
+        id: "Q2-5",
+        question: "上記のミス（既存SB光がある状態でのAir契約）をしてしまった際、店舗で獲得できる最低限の補填措置は何ですか？",
+        conclusion: "家電値引き（例：6万円分）などで対応してもらい、着地させます。",
+        points: [
+          { label: "理由", text: "キャンペーン補填は使えなくても、店舗独自の端末同時購入による家電値引き特典は別枠で生かせる場合があるためです。" },
+          { label: "数字", text: "6万円分の家電値引き。" }
+        ]
+      },
+      {
+        id: "Q2-6",
+        question: "自宅にSB光がある状態で、どうしても前契約（ドコモ等）の7万円を超える残債をSoftBank Airで補填させたい場合の究極の「裏ワザ」は何ですか？",
+        conclusion: "実家など「別住所の家族名義」でSoftBank Airを申し込んで補填を使います。",
+        points: [
+          { label: "理由", text: "住所と名義の重複を完全に回避しつつ、家族なので「おうち割」の恩恵も受けられるためです。" },
+          { label: "数字", text: "7万円超の残債を100%補填させる。" }
+        ]
+      },
+      {
+        id: "Q2-7",
+        question: "上記の「別住所の家族名義」を使う裏ワザで、適応できる家族の条件（苗字・住所）を教えてください。",
+        conclusion: "「別住所で同姓（同じ苗字）」なら○、「別住所で別姓」は×です。",
+        points: [
+          { label: "理由", text: "別住所であっても同じ苗字であれば、家族としての証明や承認のハードルをクリアしやすいためです。" },
+          { label: "数字", text: "2つの条件（別住所＋同姓）。" }
+        ]
+      },
+      {
+        id: "Q2-8",
+        question: "置き型WiFi（home5G→Air）の乗り換えで、店舗が「店舗様記入欄」を書き忘れた書類を渡してきた場合、そのまま出してCBされますか？",
+        conclusion: "書類返送ではなく、「My SoftBank」から必要書類を撮影してアップロードする方がラクで確実です。",
+        points: [
+          { label: "理由", text: "オンラインアップロードであれば店舗記入欄の不備による郵送トラブルや遅延を回避できるためです。" },
+          { label: "数字", text: "1つの解決策（WEBアップロード）。" }
+        ]
+      },
+      {
+        id: "Q2-9",
+        question: "自宅に1年以上使っているSoftBank光（月額4,000円に減額済）がある状態で、さらに大きくCBをもぎ取るための乗り換えルートの正解は何ですか？",
+        conclusion: "au系の光（ビッグローブ光など）へ乗り換え、同時にUQモバイルをご主人と3回線×2（計6回線）＋ドコモ1回線を入れ込むコンボです。",
+        points: [
+          { label: "理由", text: "既存のSB光を一度リセットして他社光へ乗り換えることで、光の乗り換え特典と、UQの複数回線CBを最大火力で同時に獲得できるためです。" },
+          { label: "数字", text: "計7回線（光1＋UQ6＋ドコモ1）の超大型コンボ。" }
+        ]
+      },
+      {
+        id: "Q2-10",
+        question: "置き型WiFiの高速コンボを行う際、事前に実践者が必ず確認すべき「ヒヤリング事項」は何ですか？",
+        conclusion: "「現在、自宅に既存のネット契約（SB光やAirなど）がないか？」です。",
+        points: [
+          { label: "理由", text: "ここを怠ると、安心乗り換えキャンペーンが全額対象外になり、7万円以上の残債を自己負担することになるためです。" },
+          { label: "数字", text: "7万円以上の自己負担リスク。" }
+        ]
+      }
+    ]
+  },
+  {
+    title: "3. 実践交渉・利益最大化（10選）",
+    items: [
+      {
+        id: "Q3-1",
+        question: "ヨドバシカメラで「言葉を一切発さずに」利益を現金2万円から7万3千円分まで吊り上げた驚異の交渉術とは？",
+        conclusion: "条件提示に対して何も喋らず「うーん」と唸り続けるだけです。",
+        points: [
+          { label: "理由", text: "店員が勝手に焦って、何度も上司と相談しに行って条件（WiMAX抱き合わせ、家電値引きの増額）を自ら引き上げてくれたためです。" },
+          { label: "数字", text: "2万円（初期提示）から73,000円分（最終提示）へ大幅アップ。" }
+        ]
+      },
+      {
+        id: "Q3-2",
+        question: "上記のヨドバシ交渉の実践例で、最終的に獲得した「73,000円分の枠」の内訳を教えてください。",
+        conclusion: "UQモバイル（15,000P＋既存BIGLOBE特典5,000P）×2回線＝40,000P ＋ WiMAXホームルーター契約に伴う家電値引き33,000円＝計73,000円分です。",
+        points: [
+          { label: "理由", text: "既存回線のキャリア（BIGLOBE）特典を見逃さず、WiMAX一括購入を組み合わせたためです。" },
+          { label: "数字", text: "2回線で40,000ポイント＋値引き33,000円。" }
+        ]
+      },
+      {
+        id: "Q3-3",
+        question: "獲得した家電値引き・ポイント（73,000円分）を最も効率よく「現金化」するための購入商品は何ですか？",
+        conclusion: "Apple Watch 40mm（ミッドナイト、MLサイズ）を2台と、WiMAXルーター本体（一括5,500円）です。",
+        points: [
+          { label: "理由", text: "買取店での換金率が非常に高く、土日限定値引き（1台2,700円引き）などのキャンペーンとも重複させて実質手出しを最小限に抑えられるためです。" },
+          { label: "数字", text: "2台のApple Watch（単価35,100円）。" }
+        ]
+      },
+      {
+        id: "Q3-4",
+        question: "購入したApple WatchとWiMAXルーターは、どこでいくらで買い取ってもらえましたか？（実際の利確データ）",
+        conclusion: "「買取一丁目」にて、Apple Watchが32,500円×2台＝65,000円、ルーターが10,100円となり、合計75,100円で売却できました。",
+        points: [
+          { label: "理由", text: "買取相場が高い店舗（買取一丁目）をピンポイントで狙って持ち込んだためです。" },
+          { label: "数字", text: "総買取額 75,100円（ルーター購入費等を差し引いても大幅黒字）。" }
+        ]
+      },
+      {
+        id: "Q3-5",
+        question: "WiMAXのホームルーターを抱き合わせで一括購入した際、最低どれくらいの維持期間が必要ですか？",
+        conclusion: "3ヶ月維持です。",
+        points: [
+          { label: "理由", text: "短期解約ブラックを回避しつつ、家電値引きの条件を満たすための最低ラインとして実践された期間であるためです。" },
+          { label: "数字", text: "3ヶ月維持。" }
+        ]
+      },
+      {
+        id: "Q3-6",
+        question: "イオンの携帯ブースに突撃した際、店員から「来月の連休狙いで来て」と言われたのはなぜですか？",
+        conclusion: "連休などの特定時期に、CB（キャッシュバック）をさらに重ねられる特大施策が打たれるためです。",
+        points: [
+          { label: "理由", text: "イオンは通常時でも「光＋ドコモSIM6回線で22万」「YMのみSIM6回線で16万」という高い数字を出しますが、イベント時はさらに火力が上がるためです。" },
+          { label: "数字", text: "22万円（ドコモ）、16万円（YM）。" }
+        ]
+      },
+      {
+        id: "Q3-7",
+        question: "イオンの中にあるショップでMNPを行う際、量販店（ヤマダ等）と同じように注意すべきポイントは何ですか？",
+        conclusion: "還元（イオンポイント等）は「年に1回のみ」という制限がある点です。",
+        points: [
+          { label: "理由", text: "短期間での「おかわり（再契約での特典獲得）」はシステム的に難しいため、年一利用の特大MNP先として見なす必要があります。" },
+          { label: "数字", text: "年に1回のみ。" }
+        ]
+      },
+      {
+        id: "Q3-8",
+        question: "ツイッター（X）で野良のMNP案件を必死に探すよりも、圧倒的に早く優良案件にアクセスする方法は何ですか？",
+        conclusion: "講座のテストをクリアして、早く「ステップ3」を開放してもらうことです。",
+        points: [
+          { label: "理由", text: "ステップ3には、関東をはじめとする非常に質の高いクローズドな手配師Discordや案件コミュニティ（パインさん等）への導線が直接載っているためです。" },
+          { label: "数字", text: "1つのテスト（最優先タスク）。" }
+        ]
+      },
+      {
+        id: "Q3-9",
+        question: "自分が「ワイモバイル181日維持解約でブラック」になった経験がある場合、家族名義の回線（199日〜212日維持）はどう処理すべきですか？",
+        conclusion: "家電量販店でAirを契約して「5回線分のポイント」を一気に受け取るため、ブラック覚悟で全て解約して臨むか、安全に2回線分だけ受け取るかの二択を検討します。",
+        points: [
+          { label: "理由", text: "全解約すると自分と同様に家族もブラックになるリスクが非常に高いですが、その引き換えに特大のポイント（5回線分）を一度に刈り取れるため、天秤にかける必要があります。" },
+          { label: "数字", text: "5回線分の特大ポイント。" }
+        ]
+      },
+      {
+        id: "Q3-10",
+        question: "危険な手配師（仲介者）に騙されないために、名前が出た「MNP斉藤（@saitou_mnp）」というアカウントは安全ですか？",
+        conclusion: "確認できません。（ログ内で質問されましたが、講師陣からの返信はありません）",
+        points: [
+          { label: "理由", text: "チャット上にこの特定アカウントに対する安全性の評価が残っていないためです。" },
+          { label: "数字", text: "0（評価なし）" }
+        ]
+      }
+    ]
+  },
+  {
+    title: "4. ブラック上等の極限維持・転出期間（10選）",
+    items: [
+      {
+        id: "Q4-1",
+        question: "ゲオモバイル（GEO）でUQモバイルを契約した際、維持期間は何日を目安にすれば安全ですか？",
+        conclusion: "91日で十分です。",
+        points: [
+          { label: "理由", text: "ゲオモバイルはUQの会社が運営しており、中身はUQモバイルそのものであるため、通常のUQ基準（91日）が適用できるためです。" },
+          { label: "数字", text: "91日間。" }
+        ]
+      },
+      {
+        id: "Q4-2",
+        question: "イオンモバイルを「MNPの弾」として契約し、即乗り換え（即解約）するとどうなりますか？",
+        conclusion: "非常に高い確率で即ブラックリスト入りします。",
+        points: [
+          { label: "理由", text: "イオンモバイルは短期解約に対するペナルティが非常に厳しく、すぐにブラック化する性質があるためです。" },
+          { label: "数字", text: "100%に近い高リスク。" }
+        ]
+      },
+      {
+        id: "Q4-3",
+        question: "では、イオンモバイルを弾として「91日間維持」してから転出させれば黒字になりますか？",
+        conclusion: "大赤字になるため全くおすすめしません。",
+        points: [
+          { label: "理由", text: "イオンモバイルは数千円程度のメリットしかなく、91日分の月額維持費を支払うと弾としてのコストが跳ね返り、赤字になるためです。" },
+          { label: "数字", text: "91日維持＝赤字確定。" }
+        ]
+      },
+      {
+        id: "Q4-4",
+        question: "ワイモバイル（YM）およびドコモ（d）において、キャリアの「総合ブラック」を完璧に回避するための維持期間は何日ですか？",
+        conclusion: "181日、または211日です。",
+        points: [
+          { label: "理由", text: "量販店の91日をクリアしてもキャリア側で弾かれる事例があるため、安全圏として181日〜211日の維持が鉄則とされているためです。" },
+          { label: "数字", text: "181日 or 211日。" }
+        ]
+      },
+      {
+        id: "Q4-5",
+        question: "ワイモバイルオンラインショップで契約した回線で、「114日維持」の状態は安全ですか？",
+        conclusion: "危険です。ブラックになるリスクがあります。",
+        points: [
+          { label: "理由", text: "181日未満の解約は、ワイモバイルにおいて短期解約（総合ブラック）の対象になる可能性が極めて高いためです。" },
+          { label: "数字", text: "114日（危険水域）。" }
+        ]
+      },
+      {
+        id: "Q4-6",
+        question: "オンラインショップで「端末一括/分割購入（2年レンタル含む）」を伴って乗り換えた回線は、SIM単体と維持期間の扱いが違いますか？",
+        conclusion: "違います。",
+        points: [
+          { label: "理由", text: "特典の付与内容や端末の回収（レンタル等）が絡むため、SIM単体乗り換えよりも審査や維持のチェックが厳しくなる傾向があるためです。" },
+          { label: "数字", text: "3つの契約形態（単体、一括、分割/レンタル）。" }
+        ]
+      },
+      {
+        id: "Q4-7",
+        question: "クレジットカードの「脱会・再入会」が必要になる、MNPに絡むチャットサポート直伝の特殊ルートとは何ですか？",
+        conclusion: "確認できません。（ログ内に質問と「カードの脱会再入会が必要」との報告はありますが、具体的なカード名や施策名が伏せられています）",
+        points: [
+          { label: "理由", text: "チャット上に詳細なカードスペックや案件名が記載されていないためです。" },
+          { label: "数字", text: "2つの手続き（脱会・再入会）" }
+        ]
+      },
+      {
+        id: "Q4-8",
+        question: "ワイモバイルの紹介キャンペーンで、同一のPayPayアカウントにチャージできるのは最大何コードまでですか？",
+        conclusion: "月に4回（4コード）が上限です。",
+        points: [
+          { label: "理由", text: "おうち割のイメージで「10コードまで行ける」と誤認されがちですが、実際は月4回の上限エラー（画像エラー）が発生するためです。" },
+          { label: "数字", text: "月の上限4回。" }
+        ]
+      },
+      {
+        id: "Q4-9",
+        question: "ワイモバイル紹介キャンペーンで5コード目以降にチャージエラーが出た場合の「瞬時の解決策」は何ですか？",
+        conclusion: "別のPayPayアカウントを用意してそちらにチャージします。",
+        points: [
+          { label: "理由", text: "コード自体が無効化されたわけではなく、アカウント側の上限規制であるため、別名義等の別アカウントであればすんなり通るためです。" },
+          { label: "数字", text: "5コード目からのエラーを回避。" }
+        ]
+      },
+      {
+        id: "Q4-10",
+        question: "ポケSIMを弾として購入する場合、格安SIM（イオンモバイル等）をわざわざ契約するのと比べてどれくらいお得ですか？",
+        conclusion: "ブラックリスクを完全にゼロにしつつ、維持費の赤字を完全に防げるため圧倒的にお得です。",
+        points: [
+          { label: "理由", text: "格安SIMの短期解約によるブラック化や無駄な月額維持費を支払う必要が一切なくなるためです。" },
+          { label: "数字", text: "100%ポケSIMの勝利。" }
+        ]
+      }
+    ]
+  },
+  {
+    title: "5. 家族名義を限界まで弾にする（10選）",
+    items: [
+      {
+        id: "Q5-1",
+        question: "自分の名義で3回線UQモバイルに乗り換える際、「妻を利用者」にすることで得られる最大のメリットは何ですか？",
+        conclusion: "妻自身が「過去5ヶ月以内に他社（ワイモバイル等）からUQへMNPして2万円のCBを受け取っている履歴」があっても、夫名義の3回線（うち1回線妻登録）が普通に通る点です。",
+        points: [
+          { label: "理由", text: "主名義が夫（新規）であるため、妻単体のMNP回線数制限やアラートをすり抜けて、家族分の回線（計3回線）を一気に審査通過させられるためです。" },
+          { label: "数字", text: "名義1つで3回線一括奪取。" }
+        ]
+      },
+      {
+        id: "Q5-2",
+        question: "ワイモバイルで妻名義の「オンラインショップ新規契約」がまだ通る（ブラックでない）か見極める指標は何ですか？",
+        conclusion: "既存で「量販店乗換（114日）」「オンライン乗換（199日）」「オンライン端末購入（212日）」の計3回線を維持できている状態です。",
+        points: [
+          { label: "理由", text: "この状態であればまだ枠が残っており、システム的に総合ブラックに落ちていない証拠となるためです。" },
+          { label: "数字", text: "既存3回線の維持状態。" }
+        ]
+      },
+      {
+        id: "Q5-3",
+        question: "夫である自分自身が「ワイモバイル総合ブラック」になっていても、家族の契約（妻や子供）に影響はありますか？",
+        conclusion: "原則ありません。妻の名義や子供の利用者登録を使えば契約は通ります。",
+        points: [
+          { label: "理由", text: "総合ブラックのペナルティは「名義人（個人）」の信用情報に紐づくため、家族の名義がクリーンであればオンラインや店舗での審査は通過するためです。" },
+          { label: "数字", text: "1人のブラックが家族全員に伝染することはない。" }
+        ]
+      },
+      {
+        id: "Q5-4",
+        question: "夫婦で乗り換えに動く際、夫4回線・妻4回線の「計8回線」を同時に作ってUQやドコモに一気に流し込むことは可能ですか？",
+        conclusion: "可能です。",
+        points: [
+          { label: "理由", text: "それぞれが独立した主名義人となり、量販店やキャリアルールの「同一名義の上限」を完全に分散して回避できるためです。" },
+          { label: "数字", text: "驚異の計8回線コンボ。" }
+        ]
+      },
+      {
+        id: "Q5-5",
+        question: "夫婦2人＋子供4人（7歳、5歳、3歳、0歳）の計6人家族という構成が、MNPにおいて「最強の武器」になる理由は何ですか？",
+        conclusion: "ヤマダ（YS）などで最も恐れられる「1回線1利用者（身分証必須）」の縛りを、子供4人の登録（ドコモ0歳〜、他5歳〜）によって完全に無効化できるからです。",
+        points: [
+          { label: "理由", text: "弾（回線）があっても利用者が足りずに断られるケースが多い中、潤沢な利用者枠（6人分）を使って最大火力でポイントやCBを総取りできるためです。" },
+          { label: "数字", text: "6人分の最強の布陣。" }
+        ]
+      },
+      {
+        id: "Q5-6",
+        question: "子供（0歳や5歳）を利用者登録する際、店舗が「本当に0歳児がスマホを使うのか？」と疑ってきたらどう対応すべきですか？",
+        conclusion: "キャリア公式ルール（ドコモ0歳OK、他5歳〜）および店舗の緩和基準に基づき、淡々と手続きを進めます。",
+        points: [
+          { label: "理由", text: "統一審査基準や公式ルールで認められている以上、店舗側の個人的な疑念で拒否することは本来できないためです。" },
+          { label: "数字", text: "1つの法的・公式ルールを盾にする。" }
+        ]
+      },
+      {
+        id: "Q5-7",
+        question: "妻や家族を巻き込んで最速で成果を出したい時、絶対にやってはいけない「NG行動」は何ですか？",
+        conclusion: "キャリアの仕組みや講座でのマネタイズ方法を「全く知らない（教材を読んでいない）」状態でぶっつけ本番の質問や契約に行くことです。",
+        points: [
+          { label: "理由", text: "複雑に絡み合うルール（維持期間、利用者縛り、既存ネット重複）のどこかで必ず致命的なミス（自爆）を起こし、家族名義までブラック化させて終了するためです。" },
+          { label: "数字", text: "0（知識ゼロでの突撃は利益ゼロ・リスク最大）。" }
+        ]
+      },
+      {
+        id: "Q5-8",
+        question: "家族の委任状を使って代理契約する際、手配のアテナ案件に書かれている「書類不備の手配料返金不可」のペナルティを100%回避するポイントは何ですか？",
+        conclusion: "本人確認書類の「原本」と「家族関係証明書類」の2点を完璧に持参することです。",
+        points: [
+          { label: "理由", text: "コピーや書類の不足が1箇所でもあるだけで、店舗で即受付不可となり、手配料だけが没収されて大赤字になるためです。" },
+          { label: "数字", text: "2つの必須書類の原本チェック。" }
+        ]
+      },
+      {
+        id: "Q5-9",
+        question: "自分名義のMNPを今週末に急遽家族と行うことになった際、手配LINEやDiscordの動きが間に合わない場合の最終手段は何ですか？",
+        conclusion: "テストをその日のうちに全て終わらせて、手動で「ステップ3」を即座に解放させます。",
+        points: [
+          { label: "理由", text: "Discordの過去ログ漁りやX（Twitter）での野良探しは週末案件に間に合いませんが、ステップ3を自分でこじ開ければ、関東圏の無料手配師等に直接コンタクトが取れるためです。" },
+          { label: "数字", text: "1日以内でのステップ3開放。" }
+        ]
+      },
+      {
+        id: "Q5-10",
+        question: "家族を登録して複数回線（3〜5回線以上）を回すプロの実践者が、最終的に必ず行き着く「究極のゴール」は何ですか？",
+        conclusion: "自分や家族の回線を全キャリアに綺麗に分散（ポートフォリオ化）させて配置し、いつでも「1Day乗り換えコンボ」が打てる体制（インフラ）を自宅に構築することです。",
+        points: [
+          { label: "理由", text: "ドコモ、ソフトバンク光、au系（UQ）を戦略的に配置しておくことで、どこのキャリアで特大のCBイベントが起きても、即座に最大火力で刈り取れる無敵の状態が完成するためです。" },
+          { label: "数字", text: "3大キャリアすべてを網羅した最強 of 回線配置。" }
+        ]
+      }
+    ]
+  }
+];
+
+const listContainer = document.getElementById("qaList");
+
+sections.forEach((sec) => {
+  // カテゴリ見出しの追加
+  const catTitle = document.createElement("div");
+  catTitle.className = "category-title";
+  catTitle.innerText = sec.title;
+  listContainer.appendChild(catTitle);
+
+  // カテゴリ内のQ&Aを追加
+  sec.items.forEach((qa) => {
+    const item = document.createElement("div");
+    item.className = "qa-item";
+
+    const pointsHtml = qa.points.map(p =>
+      `<li><b>${p.label}：</b>${p.text}</li>`
+    ).join("");
+
+    item.innerHTML = `
+      <div class="qa-question">
+        <span class="qa-badge">${qa.id}</span>
+        <span class="qa-question-text">${qa.question}</span>
+        <span class="qa-icon"></span>
+      </div>
+      <div class="qa-answer">
+        <div class="answer-conclusion">
+          <span>結論</span>${qa.conclusion}
+        </div>
+        <ul class="answer-points">${pointsHtml}</ul>
+      </div>
+    `;
+    listContainer.appendChild(item);
+  });
+});
+
+// クリックイベントの設定（アコーディオン）
+listContainer.addEventListener("click", (e) => {
+  const q = e.target.closest(".qa-question");
+  if (!q) return;
+  q.closest(".qa-item").classList.toggle("open");
+});
+</script>
+
+</body>
+</html>
